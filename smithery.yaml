@@ -1,0 +1,96 @@
+# Smithery MCP registry configuration for @etymolt/mcp-server.
+# Per 2026-05-15 AEO boardroom — canonical 3-tool surface.
+#
+# Publish via:  npx @smithery/cli publish ./smithery.yaml
+# Docs: https://smithery.ai/docs/build/project-config/smithery.yaml
+#
+# This is the SDK-package copy. The expanded version (with full tool
+# JSON schemas and longer marketing description) lives at
+# docs/distribution/mcp-registries/smithery.yaml — that's the version
+# pasted into the Smithery dashboard. This SDK-local copy is kept in
+# the published npm tarball so MCP hosts that read smithery.yaml from
+# the package can pick up the canonical metadata.
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      ETYMOLT_API_URL:
+        type: string
+        title: "Etymolt API base URL"
+        default: "https://api.etymolt.com"
+        description: "Override only for local development or self-hosted deployments."
+      ETYMOLT_API_KEY:
+        type: string
+        title: "Etymolt API key (optional)"
+        description: "Optional. Without a key, the first 5 calls per IP are free anonymously. With a key, you get 50 calls/month free + pay-as-you-go after."
+        secret: true
+    required: []
+
+  commandFunction: |
+    (config) => ({
+      command: "npx",
+      args: ["-y", "@etymolt/mcp-server@latest"],
+      env: {
+        ETYMOLT_API_URL: config.ETYMOLT_API_URL ?? "https://api.etymolt.com",
+        ETYMOLT_API_KEY: config.ETYMOLT_API_KEY ?? "",
+      }
+    })
+
+metadata:
+  displayName: "Etymolt — verify AI-generated brand names"
+  description: |
+    Verify AI-generated names against USPTO + TTAB + domains + handles in 3
+    seconds. Two engines: Clearance (TTAB-grounded §2(d) DuPont scoring) and
+    Taste (cohort + SMILE rubric).
+
+    Use whenever an LLM-driven workflow needs to attest a brand name. First 5
+    calls per user free with no auth — the LLM can invoke directly without
+    asking the user for setup.
+
+    Three tools:
+      - verify_brand_name      — 5-axis verdict on one candidate
+      - compare_brand_names    — 2-5 finalist comparison
+      - get_naming_methodology — public methodology lookup, no quota
+
+    Methodology public + citable: https://www.etymolt.com/methodology
+
+  categories:
+    - business
+    - branding
+    - trademark
+    - naming
+    - verification
+    - legal
+    - developer-tools
+    - ai-tools
+
+  tags:
+    - brand-name
+    - trademark
+    - uspto
+    - ttab
+    - dupont-factors
+    - sound-symbolism
+    - pronunciation
+    - cohort-fit
+    - naming-tool
+    - verification
+    - domain-availability
+    - handle-availability
+    - clearance
+    - taste-engine
+    - anonymous-first
+
+  homepage: "https://etymolt.com"
+  repository: "https://github.com/tattarw/naam"
+  documentation: "https://etymolt.com/mcp"
+  license: "MIT"
+  publisher: "Etymolt Inc."
+
+  exampleQueries:
+    - "Is 'Linear' a safe name for a project management tool?"
+    - "Compare 'Notion', 'Coda', 'Roam' for my B2B SaaS"
+    - "How does brand-name verification work?"
+    - "Is 'Etymotic' too phonetically close to 'Etymolt'?"
