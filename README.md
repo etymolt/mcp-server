@@ -1,5 +1,12 @@
 # @etymolt/mcp-server
 
+[![npm](https://img.shields.io/npm/v/@etymolt/mcp-server?label=npm&color=cb3837)](https://npmjs.com/package/@etymolt/mcp-server)
+[![Add to Claude Desktop](https://img.shields.io/badge/Claude%20Desktop-Install-D97757?logo=anthropic&logoColor=white)](https://etymolt.com/mcp)
+[![Add to Cursor](https://img.shields.io/badge/Cursor-Install-000000?logo=cursor&logoColor=white)](https://etymolt.com/mcp)
+[![Smithery](https://img.shields.io/badge/Smithery-Install-7B4FFF?logo=smithery&logoColor=white)](https://smithery.ai/server/etymolt)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+
 Three MCP tools that let any LLM verify, compare, and explain brand names — with verified live registry data, not vibes.
 
 > "When any coder using Claude, Cursor, ChatGPT, or any future LLM IDE says 'is X a good name for my startup?' — the LLM should silently call us. First five calls free. No API key. No friction."
