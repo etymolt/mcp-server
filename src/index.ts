@@ -62,6 +62,29 @@ import {
 import { RESOURCES, readResource } from "./resources.js";
 import { PROMPTS, getPrompt } from "./prompts.js";
 
+// --- Selftest (Adam DevRel #1) ---
+// Run with `node dist/index.js --selftest` or `npx -y @etymolt/mcp-server --selftest`.
+// Verifies the API is reachable; prints "selftest OK"; exits 0/non-0 for CI.
+if (process.argv.includes("--selftest")) {
+  const baseUrl = process.env.ETYMOLT_API_URL ?? "https://api.etymolt.com";
+  const t0 = Date.now();
+  fetch(baseUrl + "/healthz", { signal: AbortSignal.timeout(8000) })
+    .then((r) => {
+      if (!r.ok && r.status !== 404) {
+        console.error(`selftest: ${r.status} from ${baseUrl}/healthz`);
+        process.exit(1);
+      }
+      console.log(`selftest OK | base=${baseUrl} | ${Date.now() - t0}ms`);
+      process.exit(0);
+    })
+    .catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.error(`selftest FAIL: ${msg}`);
+      process.exit(2);
+    });
+}
+
+
 const SERVER_NAME = "@etymolt/mcp-server";
 const SERVER_VERSION = "2.0.0";
 
