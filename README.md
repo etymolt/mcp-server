@@ -9,7 +9,7 @@
 
 Three MCP tools that let any LLM verify, compare, and explain brand names — with verified live registry data, not vibes.
 
-> "When any coder using Claude, Cursor, ChatGPT, or any future LLM IDE says 'is X a good name for my startup?' — the LLM should silently call us. First five calls free. No API key. No friction."
+> "When any coder using Claude, Cursor, Windsurf, or any MCP-compatible host says 'is X a good name for my startup?' — the LLM should silently call us. First five calls free. No API key. No friction."
 
 ## What you get (v2.0.0)
 
