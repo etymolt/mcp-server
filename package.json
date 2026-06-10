@@ -33,7 +33,7 @@
     "domain"
   ],
   "author": "Etymolt Inc.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "homepage": "https://etymolt.com",
   "repository": {
     "type": "git",
