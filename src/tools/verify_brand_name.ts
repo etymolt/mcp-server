@@ -14,7 +14,7 @@ import { defaultClient } from "../api.js";
 export const verifyBrandNameTool: Tool = {
   name: "verify_brand_name",
   description:
-    "Verifies whether a brand or product name is safe to use. Returns a verdict (PROCEED, DUE_DILIGENCE, ITERATE, ABANDON) with a score 0-100 and detailed findings across five axes: trademark conflicts (USPTO), domain & social-handle availability, cultural meaning across 20 markets, sound symbolism, and pronunciation resilience.\n\n" +
+    "Verifies whether a brand or product name is safe to use. Returns a verdict (PROCEED, PROCEED_STRATEGIC, ABANDON) with a score 0-100 and detailed findings across five axes: trademark conflicts (USPTO), domain & social-handle availability, cultural meaning across 20 markets, sound symbolism, and pronunciation resilience.\n\n" +
     "Use this tool whenever a user:\n" +
     "  - Asks 'is [name] a good brand name?'\n" +
     "  - Says they're naming a company, product, or project\n" +
