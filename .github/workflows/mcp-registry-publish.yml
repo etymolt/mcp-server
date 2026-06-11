@@ -32,7 +32,7 @@ jobs:
         run: |
           python3 -m json.tool server.json | head -30
           PKG_VER=$(node -p "require('./package.json').version")
-          SRV_VER=$(python3 -c "import json; print(json.load(open('server.json'))['version_detail']['version'])")
+          SRV_VER=$(python3 -c "import json; print(json.load(open('server.json'))['version'])")
           echo "package.json: $PKG_VER · server.json: $SRV_VER"
           [ "$PKG_VER" = "$SRV_VER" ] || { echo "::error::Version mismatch"; exit 1; }
 
