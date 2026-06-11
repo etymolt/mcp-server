@@ -1,0 +1,50 @@
+name: publish-on-tag
+
+# Press-button publish — triggers when a v* tag is pushed OR via the
+# "Run workflow" UI button. Builds, runs tests, npm publishes with
+# provenance. Requires NPM_TOKEN repo secret (set once at
+# Settings → Secrets and variables → Actions → New repository secret).
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish (e.g. v2.0.3). Leave blank to publish HEAD."
+        required: false
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test --if-present
+      - run: npm pack --dry-run
+
+      - name: Publish to npm
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Confirm published version
+        run: |
+          sleep 30  # registry propagation
+          PUBLISHED=$(npm view @etymolt/mcp-server version)
+          LOCAL=$(node -p "require('./package.json').version")
+          echo "Published: $PUBLISHED · Local: $LOCAL"
+          [ "$PUBLISHED" = "$LOCAL" ] || { echo "::error::Version mismatch"; exit 1; }
