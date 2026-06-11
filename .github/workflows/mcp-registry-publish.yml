@@ -1,16 +1,7 @@
 name: mcp-registry-publish
 
 # Publishes server.json to registry.modelcontextprotocol.io using
-# GitHub Actions OIDC. NO operator secrets required — the registry
-# validates the OIDC token against the io.github.etymolt/* namespace
-# automatically.
-#
-# Triggers:
-#   - On v* tag push (auto, after the npm publish completes)
-#   - Via "Run workflow" UI button (manual re-publish)
-#
-# Prereq: github.com/etymolt org exists (it does) and the GitHub user
-# running this workflow has membership/admin on it.
+# GitHub Actions OIDC. NO operator secrets required.
 
 on:
   push:
@@ -19,19 +10,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write       # for OIDC token to registry
+  id-token: write
   contents: read
 
 jobs:
   registry-publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+      - uses: actions/checkout@v4
 
       - name: Install mcp-publisher
         run: |
-          # The publisher tool is shipped as a Go binary. Install from the
-          # registry repo's release artifacts.
           curl -fsSL https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz | tar xz
           chmod +x mcp-publisher
           ./mcp-publisher --version || true
@@ -41,9 +30,7 @@ jobs:
 
       - name: Verify server.json
         run: |
-          # Pretty-print first
           python3 -m json.tool server.json | head -30
-          # Sanity-check version matches package.json
           PKG_VER=$(node -p "require('./package.json').version")
           SRV_VER=$(python3 -c "import json; print(json.load(open('server.json'))['version_detail']['version'])")
           echo "package.json: $PKG_VER · server.json: $SRV_VER"
@@ -55,15 +42,13 @@ jobs:
       - name: Verify listing propagated
         run: |
           sleep 15
-          curl -fsSL "https://registry.modelcontextprotocol.io/v0/search?q=etymolt" \
-            | python3 -m json.tool
-          curl -fsSL "https://registry.modelcontextprotocol.io/v0/search?q=etymolt" \
-            | python3 -c "
-import json, sys
-d = json.load(sys.stdin)
-servers = d.get('servers', d.get('results', []))
-if not any('etymolt' in (s.get('name','').lower()) for s in servers):
-    print('::error::Etymolt not in search results yet (may need a few minutes)')
-    sys.exit(1)
-print('::notice::Etymolt MCP server visible in registry search')
-"
+          curl -fsSL "https://registry.modelcontextprotocol.io/v0/search?q=etymolt" | python3 -m json.tool
+          python3 << 'PYEOF'
+          import json, sys, urllib.request
+          d = json.load(urllib.request.urlopen("https://registry.modelcontextprotocol.io/v0/search?q=etymolt"))
+          servers = d.get("servers", d.get("results", []))
+          if not any("etymolt" in (s.get("name","").lower()) for s in servers):
+              print("::error::Etymolt not in search results yet (may need a few minutes)")
+              sys.exit(1)
+          print("::notice::Etymolt MCP server visible in registry search")
+          PYEOF
