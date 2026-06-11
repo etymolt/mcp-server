@@ -54,7 +54,7 @@ const SAMPLE_VERDICTS = [
   },
   {
     name: "Foundr",
-    verdict: "DUE_DILIGENCE",
+    verdict: "PROCEED_STRATEGIC",
     score: 71,
     one_line:
       "Foundr is workable but has one or two specific signals worth verifying before launch.",
@@ -62,7 +62,7 @@ const SAMPLE_VERDICTS = [
   },
   {
     name: "Zypher",
-    verdict: "ITERATE",
+    verdict: "ABANDON",
     score: 52,
     one_line:
       "Zypher has meaningful clearance gaps; consider variants before committing.",

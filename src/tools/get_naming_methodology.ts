@@ -94,7 +94,7 @@ Verdicts are computed across five axes:
    measuring how the name survives spoken transmission across accents.
 
 Each axis returns a 0-100 score. The composite verdict is one of PROCEED,
-DUE_DILIGENCE, ITERATE, or ABANDON.
+PROCEED_STRATEGIC or ABANDON.
 
 For the complete document with citations and worked examples, see
 https://www.etymolt.com/methodology.

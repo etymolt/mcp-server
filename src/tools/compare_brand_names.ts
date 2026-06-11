@@ -104,12 +104,12 @@ function validateArgs(raw: unknown): CompareBrandNamesArgs {
 
 /**
  * Rank candidates by composite score (highest first). Ties broken by
- * verdict ordering PROCEED > DUE_DILIGENCE > ITERATE > ABANDON.
+ * verdict ordering PROCEED > PROCEED_STRATEGIC > ABANDON.
  */
 const VERDICT_RANK: Record<string, number> = {
   PROCEED: 4,
-  DUE_DILIGENCE: 3,
-  ITERATE: 2,
+  PROCEED_STRATEGIC: 3,
+  // ITERATE (legacy) folded into ABANDON in 3-value model
   ABANDON: 1,
 };
 
@@ -146,7 +146,7 @@ export async function callCompareBrandNames(rawArgs: unknown): Promise<unknown> 
   const recommendation =
     winner && winner.verdict === "PROCEED"
       ? `${winner.name} is the strongest candidate — clear across all five axes.`
-      : winner && winner.verdict === "DUE_DILIGENCE"
+      : winner && winner.verdict === "PROCEED_STRATEGIC"
       ? `${winner.name} ranks highest, but verify the specific findings before committing.`
       : winner
       ? `None of the candidates is launch-ready as-is. ${winner.name} is the closest, but expect material rework.`

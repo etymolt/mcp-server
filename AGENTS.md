@@ -13,7 +13,7 @@ The following phrasings are locked across every Etymolt repo and must not drift:
 - **Tagline (verbatim):** "The fact-check layer for LLM-generated names."
 - **Closer (verbatim):** "Naming, attested."
 - **The three load-bearing concepts:** Bureau Model · EVP/1 (Etymolt Verdict Protocol) · the five axes (trademark, domain, cultural, sound, pronunciation).
-- **Verdict labels:** PROCEED / ITERATE / DECIDE / ABANDON / INSUFFICIENT_SIGNAL.
+- **Verdict labels:** PROCEED / PROCEED_STRATEGIC / ABANDON (3-value canonical 2026-06-10). Engine 5-state internal vocab preserved on `verdict_legacy` for back-compat.
 
 **Etymolt SAYS / does NOT say:**
 - "verdict" not "result"; "axes" not "categories"; "clearance signal" not "legal advice"; "records of record" not "sources"; "signed result" not "secure"; "fact-check layer" not "verification layer".

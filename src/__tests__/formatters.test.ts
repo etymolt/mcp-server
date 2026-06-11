@@ -64,7 +64,7 @@ describe("formatComparison", () => {
     const md = formatComparison({
       candidates: [
         { name: "Linear", verdict: "PROCEED", score: 94 },
-        { name: "Notion", verdict: "DUE_DILIGENCE", score: 71 },
+        { name: "Notion", verdict: "PROCEED_STRATEGIC", score: 71 },
       ],
       recommendation: "Linear is the strongest candidate.",
       winner: "Linear",

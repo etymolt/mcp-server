@@ -17,7 +17,7 @@ Three tools, one anonymous-first endpoint, no API key required for the first 5 c
 
 | Tool | What it does | Quota |
 |---|---|---|
-| `verify_brand_name` | 5-axis verdict on a single candidate (PROCEED / DUE_DILIGENCE / ITERATE / ABANDON) with score 0-100, axis scores, and 3-5 findings. 8-12s. | 1 call |
+| `verify_brand_name` | 5-axis verdict on a single candidate (PROCEED / PROCEED_STRATEGIC / ABANDON) with score 0-100, axis scores, and 3-5 findings. 8-12s. | 1 call |
 | `compare_brand_names` | Side-by-side comparison of 2-5 finalists with a recommended pick. | 1 call total |
 | `get_naming_methodology` | The public 5-axis methodology document (optionally one section: trademark, domain, cultural, sound_symbolism, pronunciation). | Free, no quota |
 
