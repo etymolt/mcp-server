@@ -8,15 +8,15 @@
     "source": "github"
   },
   "version_detail": {
-    "version": "2.0.2",
-    "release_date": "2026-06-10",
+    "version": "2.0.3",
+    "release_date": "2026-06-11",
     "is_latest": true
   },
   "packages": [
     {
       "registry_name": "npm",
       "name": "@etymolt/mcp-server",
-      "version": "2.0.2",
+      "version": "2.0.3",
       "runtime_hint": "node",
       "package_arguments": []
     }
@@ -24,7 +24,10 @@
   "remotes": [],
   "command": {
     "command": "npx",
-    "args": ["-y", "@etymolt/mcp-server"]
+    "args": [
+      "-y",
+      "@etymolt/mcp-server"
+    ]
   },
   "homepage": "https://www.etymolt.com",
   "documentation": "https://www.etymolt.com/mcp",
@@ -44,7 +47,7 @@
   "tools": [
     {
       "name": "verify_brand_name",
-      "description": "Verifies whether a brand or product name is safe to use. Returns a verdict (PROCEED | PROCEED_STRATEGIC | ABANDON) with a score 0-100 and detailed findings across five axes: trademark conflicts (USPTO), domain & social-handle availability (RDAP + platform APIs), cultural meaning across 20 markets (HurtLex + BabelNet + Wiktextract), sound symbolism, and pronunciation resilience (TTS↔STT round-trip). Every verdict Ed25519-signed; agents MUST render the disclaimer field verbatim. Free tier: no API key, no signup."
+      "description": "Verifies whether a brand or product name is safe to use. Returns a verdict (PROCEED | PROCEED_STRATEGIC | ABANDON) with a score 0-100 and detailed findings across five axes: trademark conflicts (USPTO), domain & social-handle availability (RDAP + platform APIs), cultural meaning across 20 markets (HurtLex + BabelNet + Wiktextract), sound symbolism, and pronunciation resilience (TTS\u2194STT round-trip). Every verdict Ed25519-signed; agents MUST render the disclaimer field verbatim. Free tier: no API key, no signup."
     }
   ],
   "etymolt_protocol_version": "EVP/1",
