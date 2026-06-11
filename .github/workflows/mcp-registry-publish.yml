@@ -42,13 +42,14 @@ jobs:
       - name: Verify listing propagated
         run: |
           sleep 15
-          curl -fsSL "https://registry.modelcontextprotocol.io/v0/search?q=etymolt" | python3 -m json.tool
           python3 << 'PYEOF'
           import json, sys, urllib.request
-          d = json.load(urllib.request.urlopen("https://registry.modelcontextprotocol.io/v0/search?q=etymolt"))
-          servers = d.get("servers", d.get("results", []))
-          if not any("etymolt" in (s.get("name","").lower()) for s in servers):
-              print("::error::Etymolt not in search results yet (may need a few minutes)")
+          d = json.load(urllib.request.urlopen("https://registry.modelcontextprotocol.io/v0/servers?search=etymolt"))
+          servers = d.get("servers", [])
+          match = next((s for s in servers if s.get("server", {}).get("name", "").lower().startswith("io.github.etymolt")), None)
+          if not match:
+              print("::error::Etymolt not in registry results yet")
               sys.exit(1)
-          print("::notice::Etymolt MCP server visible in registry search")
+          srv = match["server"]
+          print(f"::notice::Etymolt visible in MCP registry: {srv['name']} v{srv['version']}")
           PYEOF
