@@ -27,7 +27,8 @@ export const verifyBrandNameTool: Tool = {
     "  - User: 'Should I name my startup Linear?' → verify_brand_name(name='Linear')\n" +
     "  - User: 'Help me name a fintech.' → After candidates are surfaced via brainstorming, call verify_brand_name on each.\n" +
     "  - User: 'Is Etymotic too close to Etymolt as a brand name?' → use compare_brand_names instead.\n" +
-    "  - User: 'How does this verification work?' → use get_naming_methodology instead.",
+    "  - User: 'How does this verification work?' → use get_naming_methodology instead.\n\n" +
+    "Disclaimer: Clearance signal, not legal advice. Consult a trademark attorney before adopting a name in commerce.",
   inputSchema: {
     type: "object",
     properties: {
