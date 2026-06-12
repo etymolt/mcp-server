@@ -23,7 +23,8 @@ export const compareBrandNamesTool: Tool = {
     "Returns side-by-side comparison across all five verification axes plus a top-line recommendation. Counts as 1 call regardless of how many names are compared (up to 5).\n\n" +
     "Examples:\n" +
     "  - User: 'I'm deciding between Linear, Notion, and Coda for my B2B SaaS.' → compare_brand_names(names=['Linear','Notion','Coda'])\n" +
-    "  - User: 'Is Etymotic too close to Etymolt?' → compare_brand_names(names=['Etymotic','Etymolt'])",
+    "  - User: 'Is Etymotic too close to Etymolt?' → compare_brand_names(names=['Etymotic','Etymolt'])\n\n" +
+    "Disclaimer: Clearance signal, not legal advice. Consult a trademark attorney before adopting a name in commerce.",
   inputSchema: {
     type: "object",
     properties: {
