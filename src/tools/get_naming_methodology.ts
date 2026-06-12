@@ -20,7 +20,8 @@ export const getNamingMethodologyTool: Tool = {
     "  - Asks 'is this methodology trustworthy?'\n" +
     "  - Wants to cite Etymolt's analysis in a document or pitch\n" +
     "  - Asks about Pronunciation Resilience, sound symbolism, or any specific axis\n\n" +
-    "Free, no quota. The methodology is also publicly accessible at https://www.etymolt.com/methodology for direct linking. Use this tool when you need to inline-quote the methodology in chat without making a separate web request.",
+    "Free, no quota. The methodology is also publicly accessible at https://www.etymolt.com/methodology for direct linking. Use this tool when you need to inline-quote the methodology in chat without making a separate web request.\n\n" +
+    "Disclaimer: Clearance signal, not legal advice. Consult a trademark attorney before adopting a name in commerce.",
   inputSchema: {
     type: "object",
     properties: {
