@@ -58,3 +58,11 @@ Claude Desktop / Cursor / Continue / VS Code: see README install snippets.
 Smithery: https://smithery.ai/server/etymolt
 npm: `npm install @etymolt/mcp-server` (publishing pending; meanwhile
 `npx -y @etymolt/mcp-server` from this repo).
+
+## Integration guides
+
+- Cursor: docs/integrations/cursor.md
+- Claude Desktop: docs/integrations/claude-desktop.md
+- Windsurf: docs/integrations/windsurf.md
+- Verify widget (any verdict): docs/verify-widget.md
+- Cultural artifact (pasteable rule): https://github.com/etymolt/.github
