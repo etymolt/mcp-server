@@ -2,11 +2,12 @@
 /**
  * @etymolt/mcp-server — entry point (v2.0.0).
  *
- * Three tools, prioritized for the LLM-orchestrator use case:
+ * Four tools, prioritized for the LLM-orchestrator use case:
  *
  *   1. verify_brand_name        — primary surface (90%+ of calls)
- *   2. compare_brand_names      — 2-5 finalist comparison
- *   3. get_naming_methodology   — public methodology lookup, no quota
+ *   2. unblock_name            — closest-clear variants when ABANDON
+ *   3. compare_brand_names      — 2-5 finalist comparison
+ *   4. get_naming_methodology   — public methodology lookup, no quota
  *
  * Three MCP resources:
  *
@@ -51,6 +52,10 @@ import {
   getNamingMethodologyTool,
   callGetNamingMethodology,
 } from "./tools/get_naming_methodology.js";
+import {
+  unblockNameTool,
+  unblockName as callUnblockName,
+} from "./tools/unblock_name.js";
 import { UpgradeRequiredError } from "./api.js";
 import {
   dualFormat,
@@ -129,6 +134,7 @@ const server = new Server(
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     verifyBrandNameTool,
+    unblockNameTool,
     compareBrandNamesTool,
     getNamingMethodologyTool,
   ],
@@ -150,6 +156,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case "get_naming_methodology": {
         const result = await callGetNamingMethodology(args ?? {});
         return dualFormat(name, result, formatMethodology);
+      }
+      case "unblock_name": {
+        const text = await callUnblockName(args as any ?? {});
+        return { content: [{ type: "text", text }] };
       }
       default:
         return dualFormatError(

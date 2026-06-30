@@ -1,7 +1,7 @@
 {
   "name": "@etymolt/mcp-server",
   "mcpName": "io.github.etymolt/mcp-server",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "MCP server for brand-name verification. Three tools \u2014 verify_brand_name (5-axis verdict on a single candidate), compare_brand_names (2-5 finalist comparison), get_naming_methodology (public methodology lookup) \u2014 route to the anonymous-first /v1/verify endpoint. First 5 calls free, no API key required.",
   "main": "dist/index.js",
   "type": "module",
